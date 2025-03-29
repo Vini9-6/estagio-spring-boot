@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PortalVagas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">PortalVagas</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/candidatos/login}">Candidato</a></li>
+                <li><a th:href="@{/empresas/login}">Empresa</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Bem-vindo ao PortalVagas</h1>
+            <p>Encontre as melhores oportunidades de estágio ou cadastre suas vagas conosco.</p>
+        </section>
+    </main>
+</body>
+</html>

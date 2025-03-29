@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Candidatar-se - PortalVagas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">PortalVagas</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/vagas/candidatos}">Vagas Disponíveis</a></li>
+                <li><a th:href="@{/logout-candidato}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Candidatar-se à Vaga</h2>
+            <div th:if="${error}" class="alert alert-danger">
+                <p th:text="${error}">Erro ao se candidatar. Tente novamente.</p>
+            </div>
+            <div th:if="${success}" class="alert alert-success">
+                <p th:text="${success}">Candidatura realizada com sucesso!</p>
+            </div>
+            <form th:action="@{/candidatos/candidatar}" method="post">
+                <!-- Passando o ID da vaga e do candidato como campos ocultos -->
+                <input type="hidden" name="vagaId" th:value="${vaga.id}">
+                <input type="hidden" name="candidatoId" th:value="${candidato.id}"> <!-- Candidato logado -->
+                
+
+                <div>
+                    <label for="mensagem">Mensagem de Candidatura:</label>
+                    <textarea id="mensagem" name="mensagem" required></textarea>
+                </div>
+                <div>
+                    <button type="submit">Enviar Candidatura</button>
+                </div>
+            </form>
+            <a th:href="@{/vagas/candidatos}">Voltar para as Vagas Disponíveis</a>
+        </section>
+    </main>
+</body>
+</html>

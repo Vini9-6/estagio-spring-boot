@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${vaga.id != null ? 'Editar Vaga - PortalVagas' : 'Cadastrar Vaga - PortalVagas'}">Cadastrar Vaga - PortalVagas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/vagas-empresa" class="logo">PortalVagas</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/vagas-empresa}">Vagas</a></li>
+                <li><a th:href="@{/logout-empresa}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2 th:text="${vaga.id != null ? 'Editar Vaga' : 'Cadastrar Vaga'}">Cadastrar Vaga</h2>
+            <form th:action="@{${vaga.id != null ? '/vagas/editar/' + vaga.id : '/vagas/cadastrar'}}" th:object="${vaga}" method="post">
+                <div>
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" th:field="*{titulo}" required>
+                </div>
+                <div>
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" th:field="*{descricao}" required></textarea>
+                </div>
+                <div>
+                    <button type="submit" th:text="${vaga.id != null ? 'Salvar alterações' : 'Cadastrar'}">Cadastrar</button>
+                </div>
+            </form>            
+        </section>
+    </main>
+</body>
+</html>

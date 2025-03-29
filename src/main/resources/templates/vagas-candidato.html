@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vagas Disponíveis - PortalVagas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/vagas-candidatos" class="logo">PortalVagas</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/logout-candidato}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Vagas Disponíveis</h2>
+            <div th:if="${vagas.empty}" class="alert alert-info">
+                <p>Não há vagas disponíveis no momento.</p>
+            </div>
+            <table th:if="${!vagas.empty}">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Descrição</th>
+                        <th>Data de Publicação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="vaga : ${vagas}">
+                        <td th:text="${vaga.titulo}">Título da Vaga</td>
+                        <td th:text="${vaga.descricao}">Descrição da Vaga</td>
+                        <td th:text="${#dates.format(vaga.dataPublicacao, 'dd/MM/yyyy')}">Data de Publicação</td>
+                        <td>
+                            <form th:action="@{/candidatos/candidatar}" method="post" style="display:inline;">
+                                <input type="hidden" name="vagaId" th:value="${vaga.id}">
+                                <button type="submit">Candidatar-se</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

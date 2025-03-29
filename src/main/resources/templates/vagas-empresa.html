@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vagas da Empresa - PortalVagas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/vagas-empresa" class="logo">PortalVagas</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/logout-empresa}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Vagas Cadastradas pela Empresa</h2>
+            <div>
+                <a th:href="@{/vagas/cadastrar}">Cadastrar Nova Vaga</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Descrição</th>
+                        <th>Data de Publicação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="vaga : ${vagas}">
+                        <td th:text="${vaga.titulo}">Título da Vaga</td>
+                        <td th:text="${vaga.descricao}">Descrição da Vaga</td>
+                        <td th:text="${#dates.format(vaga.dataPublicacao, 'dd/MM/yyyy')}">Data de Publicação</td>
+                        <td>
+                            <a th:href="@{'/vagas/editar/' + ${vaga.id}}">Editar</a>
+                            <form th:action="@{/vagas/excluir}" method="post" style="display:inline;">
+                                <input type="hidden" name="vagaId" th:value="${vaga.id}">
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
